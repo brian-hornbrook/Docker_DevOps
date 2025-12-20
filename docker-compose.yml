@@ -1,15 +1,18 @@
 services:
   app:
-    build: ./your_quality_programmer
+    build: .
     restart: unless-stopped
-    container_name: Docker-secured
+    container_name: docker-secured
     ports:
       - "8000:8000"
     depends_on:
       - db
     command: >
-      bash -c "
-      python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+      sh -c "
+        python manage.py makemigrations
+        python manage.py migrate
+        tail -f /dev/null
+      "
     volumes:
       - ./your_quality_programmer:/code
     develop:
@@ -23,7 +26,7 @@ services:
       - .env
   db:
     image: postgres:17
-    container_name: Docker-secured-db
+    container_name: docker-secured-db
     environment:
       POSTGRES_DB: ${DATABASE_NAME}
       POSTGRES_USER: ${DATABASE_USERNAME}

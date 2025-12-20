@@ -5,8 +5,9 @@ ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 
 RUN mkdir /code
-COPY . /code/
+COPY ./your_quality_programmer /code/
 WORKDIR /code
+
 
 RUN pip install --upgrade pip \
     && pip install -r requirements.txt
