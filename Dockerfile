@@ -4,12 +4,18 @@ FROM python:3.14-slim
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 
-RUN mkdir /code
-COPY ./your_quality_programmer /code/
-WORKDIR /code
+RUN useradd -m appuser
+USER appuser
+RUN mkdir ~/code
 
 
-RUN pip install --upgrade pip \
-    && pip install -r requirements.txt
+#RUN mkdir /code
+#COPY ./your_quality_programmer /code/
+#WORKDIR /code
+
+# RUN python3 -m venv env
+
+#RUN pip install --upgrade pip \
+#    && pip install -r requirements.txt
 
 EXPOSE 8000
