@@ -18,16 +18,7 @@ COPY ./your_quality_programmer /home/appuser/code/
 
 ## create virtual environment
 RUN cd && \
-    python3 -m venv env &&\
+    python3 -m venv env && \
     pip install django==5.2.* gunicorn psycopg2-binary
-
-#RUN mkdir /code
-#COPY ./your_quality_programmer /code/
-#WORKDIR /code
-
-# RUN python3 -m venv env
-
-#RUN pip install --upgrade pip \
-#    && pip install -r requirements.txt
 
 EXPOSE 8000
