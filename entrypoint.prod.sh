@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-cd /home/appuser
-python3 -m venv env
+python manage.py collectstatic --noinput
+python manage.py migrate --noinput
+python -m gunicorn --bind 0.0.0.0:8000 --workers 3 your_quality_programmer.wsgi:application
