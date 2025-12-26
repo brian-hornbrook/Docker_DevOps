@@ -15,9 +15,12 @@ ENV PYTHONUNBUFFERED=1
 RUN pip install --upgrade pip
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
+RUN rm /app/requirements.txt
 
 # Stage 2: Production stage
 FROM python:3.14-slim
+
+RUN apt-get update && apt-get install -y iputils-ping
 
 RUN useradd -m -r appuser && \
    mkdir /app && \
@@ -31,7 +34,7 @@ COPY --from=builder /usr/local/bin/ /usr/local/bin/
 WORKDIR /app
 
 # Copy application code
-COPY --chown=appuser:appuser . .
+COPY --chown=appuser:appuser ./your_quality_programmer .
 
 # Set environment variables to optimize Python
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -43,8 +46,9 @@ USER appuser
 # Expose the application port
 EXPOSE 8000
 
-# Make entry file executable
-RUN chmod +x  /app/entrypoint.prod.sh
-
-# Start the application using Gunicorn
-#CMD ["/app/entrypoint.prod.sh"]
+## Make entry file executable
+#COPY --chown=appuser:appuser entrypoint.sh .
+#RUN chmod +x  /app/entrypoint.sh
+#
+## Start the application using Gunicorn
+#CMD /bin/bash -c "/app/entrypoint.sh"
