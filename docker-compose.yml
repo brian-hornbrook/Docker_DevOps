@@ -24,14 +24,11 @@ services:
     env_file:
       - .env
   frontend-proxy:
-    image: nginx
+    build: .
     container_name: docker-devops-proxy
     ports:
       - "80:80"
       - "443:443"
-    volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
-#      - ./your_quality_programmer/app/static:/app/
     depends_on:
       - django-web
 
