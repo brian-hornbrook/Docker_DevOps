@@ -31,30 +31,6 @@ services:
       - "443:443"
     depends_on:
       - django-web
-
-#  app:
-#    build: .
-#    restart: unless-stopped
-#    container_name: docker-secured
-#    ports:
-#      - "8000:8000"
-#    depends_on:
-#      - db
-#    command: >
-#      sh -c "
-#        tail -f /dev/null
-#      "
-#    volumes:
-#      - ./your_quality_programmer:/app
-#    develop:
-#      watch:
-#        - action: sync
-#          path: ./your_quality_programmer
-#          target: /app
-#          ignore:
-#            - Dockerfile
-#    env_file:
-#      - .env
   db:
     image: postgres:17
     container_name: docker-devops-db
