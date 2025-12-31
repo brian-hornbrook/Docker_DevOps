@@ -23,8 +23,8 @@ services:
           target: /app
     env_file:
       - .env
-  frontend-proxy:
-    build: .
+  nginx:
+    build: ./nginx
     container_name: docker-devops-proxy
     ports:
       - "80:80"
