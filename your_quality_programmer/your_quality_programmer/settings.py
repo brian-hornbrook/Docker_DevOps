@@ -29,7 +29,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["yourhonestprogrammer.com", "localhost"]
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -71,6 +70,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'your_quality_programmer.wsgi.application'
 
+# Allow SSL Header with HTTPS
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
