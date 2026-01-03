@@ -1,5 +1,5 @@
 services:
-  django-web:
+  app:
     build: .
     container_name: docker-devops
     ports:
