@@ -41,9 +41,9 @@ services:
     image: certbot/certbot
     container_name: certbot
     volumes:
-      - ./certbot/certbot-etc:/etc/letsencrypt
-      - ./certbot/certbot-var:/var/lib/letsencrypt
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    - ./certbot/conf:/etc/letsencrypt
+    - ./certbot/www:/var/www/certbot
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email yourqualityprogrammer@gmail.com -d yourhonestprogrammer.com --agree-tos
   db:
     image: postgres:17
     container_name: docker-devops-db
