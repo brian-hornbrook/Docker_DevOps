@@ -41,8 +41,8 @@ services:
     image: certbot/certbot
     container_name: certbot
     volumes:
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
+      - ./certbot/certbot-etc:/etc/letsencrypt
+      - ./certbot/certbot-var:/var/lib/letsencrypt
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     entrypoint: ./ssl.sh
   db:
