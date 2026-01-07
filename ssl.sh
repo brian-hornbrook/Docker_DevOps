@@ -8,7 +8,6 @@ docker compose run --rm certbot certbot certonly --webroot \
 docker run -it --rm \
   -v ./certbot/etc/letsencrypt:/etc/letsencrypt \
   -v ./certbot/var/lib/letsencrypt:/var/lib/letsencrypt \
-  -v ./certbot/var/www/html:/var/www/html \
   certbot/certbot certonly --webroot -w /var/www/html \
   -d yourhonestprogrammer.com -d www.yourhonestprogrammer.com \
   --email yourqualityprogrammer@gmail.com --agree-tos
