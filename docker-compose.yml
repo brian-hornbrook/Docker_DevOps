@@ -41,8 +41,8 @@ services:
     image: certbot/certbot
     container_name: certbot
     volumes:
-    - ./certbot/conf:/etc/letsencrypt
-    - ./certbot/www:/var/www/certbot
+    - certbot_www:/var/www/certbot
+    - certbot_etc:/etc/letsencrypt
     command: certonly --webroot -w /var/www/certbot --force-renewal --email yourqualityprogrammer@gmail.com -d yourhonestprogrammer.com --agree-tos
   db:
     image: postgres:17

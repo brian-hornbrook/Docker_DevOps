@@ -11,3 +11,5 @@ docker run -it --rm \
   certbot/certbot certonly --webroot -w /var/www/html \
   -d yourhonestprogrammer.com -d www.yourhonestprogrammer.com \
   --email yourqualityprogrammer@gmail.com --agree-tos
+
+certonly --webroot --webroot-path=/var/www/certbot --email your-yourqualityprogrammer@gmail.com --agree-tos --no-eff-email --staging -d yourhonestprogrammer.com -d www.yourhonestprogrammer.com
