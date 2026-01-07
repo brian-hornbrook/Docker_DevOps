@@ -16,7 +16,7 @@ services:
       "
     volumes:
       - ./your_quality_programmer:/app
-      - static_volume:/app/static
+      - web_static:/app/static
     develop:
       watch:
         - action: sync
@@ -28,6 +28,8 @@ services:
     build: ./nginx
     container_name: docker-devops-proxy
     volumes:
+      - web_static:/static:ro
+      - static:/var/www/certbot
       - certbot_www:/var/www/certbot
       - certbot_etc:/etc/letsencrypt
     ports:
@@ -58,7 +60,7 @@ services:
 
 volumes:
   postgres_data:
-  static_volume:
+  web_static:
   certbot_www:
   certbot_etc:
 
