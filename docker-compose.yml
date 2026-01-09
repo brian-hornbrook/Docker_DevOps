@@ -6,8 +6,6 @@ services:
       - "8000:8000"
     depends_on:
       - db
-#    volumes:
-#      - ./static:/app/static
     command: >
       sh -c "
         python manage.py collectstatic --noinput
@@ -24,26 +22,26 @@ services:
           target: /app
     env_file:
       - .env
-  nginx:
-    build: ./nginx
-    container_name: docker-devops-proxy
-    volumes:
-      - web_static:/static:ro
-      - static:/var/www/certbot
-      - certbot_www:/var/www/certbot
-      - certbot_etc:/etc/letsencrypt
-    ports:
-      - "80:80"
-      - "443:443"
-    depends_on:
-      - web
-  certbot:
-    image: certbot/certbot
-    container_name: certbot
-    volumes:
-      - certbot_www:/var/www/certbot
-      - certbot_etc:/etc/letsencrypt
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email yourqualityprogrammer@gmail.com -d yourhonestprogrammer.com --agree-tos
+#  nginx:
+#    build: ./nginx
+#    container_name: docker-devops-proxy
+#    volumes:
+#      - web_static:/static:ro
+#      - static:/var/www/certbot
+#      - certbot_www:/var/www/certbot
+#      - certbot_etc:/etc/letsencrypt
+#    ports:
+#      - "80:80"
+#      - "443:443"
+#    depends_on:
+#      - web
+#  certbot:
+#    image: certbot/certbot
+#    container_name: certbot
+#    volumes:
+#      - certbot_www:/var/www/certbot
+#      - certbot_etc:/etc/letsencrypt
+#    command: certonly --webroot -w /var/www/certbot --force-renewal --email yourqualityprogrammer@gmail.com -d yourhonestprogrammer.com --agree-tos
   db:
     image: postgres:17
     container_name: docker-devops-db
