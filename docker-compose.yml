@@ -8,10 +8,13 @@ services:
       - db
     command: >
       sh -c "
-        python manage.py collectstatic --noinput
-        python manage.py migrate --noinput
-        python -m gunicorn --bind 0.0.0.0:8000 --workers 3 your_quality_programmer.wsgi:application
+        python manage.py runserver 0.0.0.0:8000
       "
+    #      sh -c "
+    #        python manage.py collectstatic --noinput
+    #        python manage.py migrate --noinput
+    #        python -m gunicorn --bind 0.0.0.0:8000 --workers 3 your_quality_programmer.wsgi:application
+    #      "
     volumes:
       - ./your_quality_programmer:/app
       - web_static:/app/static
@@ -20,6 +23,20 @@ services:
         - action: sync
           path: ./your_quality_programmer
           target: /app
+    env_file:
+      - .env
+  db:
+    image: postgres:17
+    container_name: docker-devops-db
+#    environment:
+#      POSTGRES_DB: ${DATABASE_NAME}
+#      POSTGRES_USER: ${DATABASE_USERNAME}
+#      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     env_file:
       - .env
 #  nginx:
@@ -42,19 +59,6 @@ services:
 #      - certbot_www:/var/www/certbot
 #      - certbot_etc:/etc/letsencrypt
 #    command: certonly --webroot -w /var/www/certbot --force-renewal --email yourqualityprogrammer@gmail.com -d yourhonestprogrammer.com --agree-tos
-  db:
-    image: postgres:17
-    container_name: docker-devops-db
-    environment:
-      POSTGRES_DB: ${DATABASE_NAME}
-      POSTGRES_USER: ${DATABASE_USERNAME}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    env_file:
-      - .env
 
 volumes:
   postgres_data:
