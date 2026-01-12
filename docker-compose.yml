@@ -2,6 +2,13 @@ services:
   web:
     build: .
     container_name: docker-devops
+    environment:
+      DATABASE_ENGINE: ${DATABASE_ENGINE}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
     ports:
       - "8000:8000"
     depends_on:
@@ -28,14 +35,14 @@ services:
   db:
     image: postgres:17
     container_name: docker-devops-db
-#    environment:
-#      POSTGRES_DB: ${DATABASE_NAME}
-#      POSTGRES_USER: ${DATABASE_USERNAME}
-#      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
-      - ./database/postgres_data:/var/lib/postgresql/data
+#      - ./database/postgres_data:/var/lib/postgresql/data
       - postgres_data:/var/lib/postgresql/data
     env_file:
       - .env
