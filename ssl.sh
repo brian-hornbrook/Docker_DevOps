@@ -2,6 +2,7 @@
 
 # gets SSL
 certonly --webroot --webroot-path=/var/www/certbot --email your-yourqualityprogrammer@gmail.com --agree-tos --no-eff-email --staging -d yourhonestprogrammer.com -d www.yourhonestprogrammer.com
+docker-compose run --rm certbot certonly --webroot --webroot-path=/var/www/certbot --email your-yourqualityprogrammer@gmail.com --agree-tos --no-eff-email --force-renewal -d your-yourqualityprogrammer@gmail.com -d www.your-yourqualityprogrammer@gmail.com
 
 # backup data
 docker exec -t docker-devops-db pg_dump -U DATABASE_USERNAME DATABASE_NAME > backup.sql
